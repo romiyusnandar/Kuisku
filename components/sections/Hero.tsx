@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Trophy } from "lucide-react";
+import Link from "next/link";
 import Button from "@/components/ui/Button";
 
 export default function Hero() {
@@ -52,14 +53,18 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="primary" size="lg" className="group">
-              Mulai Kuis Sekarang
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </Button>
-            <Button variant="secondary" size="lg">
-              <Trophy className="w-5 h-5" />
-              Lihat Papan Peringkat
-            </Button>
+            <Link href="/login">
+              <Button variant="primary" size="lg" className="group">
+                Mulai Kuis Sekarang
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Button>
+            </Link>
+            <Link href="/leaderboard">
+              <Button variant="secondary" size="lg">
+                <Trophy className="w-5 h-5" />
+                Lihat Papan Peringkat
+              </Button>
+            </Link>
           </div>
 
           {/* Stats */}
