@@ -31,8 +31,8 @@ export default async function LeaderboardPage() {
     .order("created_at", { ascending: true })
     .limit(10);
 
-  const topThree = leaderboardData.slice(0, 3);
-  const restOfList = leaderboardData.slice(3);
+  const topThree = leaderboardData?.slice(0, 3) || [];
+  const restOfList = leaderboardData?.slice(3) || [];
 
   const getRankIcon = (index: number) => {
     if (index === 0) return <Crown className="w-8 h-8 text-amber-500" />;
