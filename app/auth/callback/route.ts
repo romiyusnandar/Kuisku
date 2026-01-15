@@ -5,7 +5,8 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/";
+  // Always redirect to dashboard after successful login
+  const next = searchParams.get("next") ?? "/dashboard";
 
   if (code) {
     const cookieStore = await cookies();
@@ -35,7 +36,17 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`);
+      // Use absolute URL for redirect to avoid path issues
+      const forwardedHost = request.headers.get("x-forwarded-host");
+      const isLocalEnv = process.env.NODE_ENV === "development";
+
+      if (isLocalEnv) {
+        return NextResponse.redirect(`${origin}${next}`);
+      } else {
+        // Production: use forwarded host for Vercel
+        const host = forwardedHost || new URL(origin).host;
+        return NextResponse.redirect(`https://${host}${next}`);
+      }
     }
   }
 
