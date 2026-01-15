@@ -127,7 +127,7 @@ export default async function LeaderboardPage() {
                     {topThree[1] && (
                       <div className="flex flex-col items-center w-32 md:w-36">
                         <div className="relative mb-6">
-                          {topThree[1].user_avatar ? (
+                          {topThree[1].player_avatar ? (
                             <div className="w-20 h-20 md:w-24 md:h-24 rounded-full ring-4 ring-slate-300 overflow-hidden shadow-xl">
                               <Image
                                 src={topThree[1].player_avatar}
